@@ -1,0 +1,1 @@
+python3 DecisionTree/ID3.py
