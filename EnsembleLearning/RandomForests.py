@@ -212,7 +212,6 @@ def Report_2_2_e(_columns, _attribute_values, _attribute_types, _labels, trainin
             Bagged(sample_data, columns[:-1], 4)
         bagged_predictors[i] = trees.copy()
         trees.clear()
-        print(i)
 
     bias_sum = 0
     var_sum = 0
