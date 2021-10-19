@@ -180,7 +180,7 @@ def BaggedPredictRow(row):
     return max(set(predictions), key=predictions.count)
 
 
-def BaggedPredictRow(_trees, row):
+def BaggedPredictRow2(_trees, row):
     predictions = []
     for tree in _trees:
         predictions.append(PredictRow(tree, row))
@@ -208,7 +208,7 @@ def Report_2_2_e(_columns, _attribute_values, _attribute_types, _labels, trainin
     bagged_predictors = {}
     for i in range(100):
         sample_data = training_data.sample(n=1000)
-        for t in range(10):
+        for _ in range(10):
             Bagged(sample_data, columns[:-1], 4)
         bagged_predictors[i] = trees.copy()
         trees.clear()
@@ -244,7 +244,7 @@ def Report_2_2_e(_columns, _attribute_values, _attribute_types, _labels, trainin
         # Compute prediction of 100 single trees.
         predictions = []
         for i in range(100):
-            predictions.append(1 if BaggedPredictRow(
+            predictions.append(1 if BaggedPredictRow2(
                 bagged_predictors[i], row) == "yes" else 0)
 
         avg = np.mean(predictions)
@@ -279,7 +279,7 @@ def Report_2_2_d(_columns, _attribute_values, _attribute_types, _labels, trainin
     test_data = pd.read_csv(test_data_filepath)
     test_data.columns = columns
 
-    print("Random")
+    print("Random Forests")
     feature_subset_sizes = [2, 4, 6]
     for size in feature_subset_sizes:
         print(f"Feature Subset Size = {size}")
@@ -289,6 +289,7 @@ def Report_2_2_d(_columns, _attribute_values, _attribute_types, _labels, trainin
             result1 = "{0:.4f}".format(BaggedPredict(training_data))
             result2 = "{0:.4f}".format(BaggedPredict(test_data))
             print(f"{T}, {result1}, {result2}")
+        trees.clear()
 
 
 def main():
