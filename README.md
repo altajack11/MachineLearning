@@ -2,7 +2,7 @@ This is a machine learning library developed by Jack O'Donoghue forCS5350/6350 i
 
 #ASSIGNMENT 2 INFORMATION#
 
-To run a part of the code corelating to the assignment simply do:
+To run a part of the code corelating to the assignment simply run the below command from the MachineLearning Folder:
 
 ./run.sh {arg}
 

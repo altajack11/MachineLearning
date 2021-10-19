@@ -223,7 +223,7 @@ def Report_2_2_c(_columns, _attribute_values, _attribute_types, _labels, trainin
     bagged_predictors = {}
     for i in range(100):
         sample_data = training_data.sample(n=1000)
-        for t in range(10):
+        for t in range(500):
             Bagged(sample_data, columns[:-1], t)
         bagged_predictors[i] = trees.copy()
         trees.clear()
