@@ -195,7 +195,7 @@ def BaggedPredictRow(row):
     return max(set(predictions), key=predictions.count)
 
 
-def BaggedPredictRow(_trees, row):
+def BaggedPredictRow2(_trees, row):
     predictions = []
     for tree in _trees:
         predictions.append(PredictRow(tree, row))
@@ -259,7 +259,7 @@ def Report_2_2_c(_columns, _attribute_values, _attribute_types, _labels, trainin
         # Compute prediction of 100 single trees.
         predictions = []
         for i in range(100):
-            predictions.append(1 if BaggedPredictRow(
+            predictions.append(1 if BaggedPredictRow2(
                 bagged_predictors[i], row) == "yes" else 0)
 
         avg = np.mean(predictions)
