@@ -3,7 +3,7 @@
 arg="$1"
 
 case "$arg" in
-    0 ) python3 EnsembleLearning/Adaboost.py 0;;
+    0 ) python3 EnsembleLearning/AdaBoost.py 0;;
     1 ) python3 EnsembleLearning/BaggedTrees.py 1;;
     2 ) python3 EnsembleLearning/BaggedTrees.py 2;;
     3 ) python3 EnsembleLearning/RandomForests.py 3;;
