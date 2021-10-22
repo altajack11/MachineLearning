@@ -208,8 +208,7 @@ def Report_VotedPerceptron(training_data_filepath, test_data_filepath):
 
     print("w, c")
     for i in range(len(w)):
-        if i % 10 == 0:
-            print(f" {c[i]}: {printA(w[i])}")
+        print(f" {c[i]}: {printA(w[i])}")
     print("Learing Rate r:")
     print(r)
     print("predictions of Test Data")
