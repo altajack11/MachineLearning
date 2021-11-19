@@ -13,7 +13,7 @@ case "$arg" in
     7 ) python3 Perceptron/Perceptron.py 7;;
     8 ) python3 Perceptron/Perceptron.py 8;;
     9 ) python3 Perceptron/Perceptron.py 9;;
-    7 ) python3 SVM/SVM.py 10;;
-    8 ) python3 SVM/SVM.py 11;;
-    9 ) python3 SVM/SVM.py 12;;
+    10 ) python3 SVM/SVM.py 10;;
+    11 ) python3 SVM/SVM.py 11;;
+    12 ) python3 SVM/SVM.py 12;;
 esac
