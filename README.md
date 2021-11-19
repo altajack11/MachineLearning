@@ -12,7 +12,7 @@ Here is the list of args and what they corelate to:
 
 11 - 2.3.a - Dual SVM
 
-12 - 2.3.a - Dual SVM with Kernel
+12 - 2.3.b and 2.3.c - Dual SVM with Kernel
 
 
 #ASSIGNMENT 3 INFORMATION#
