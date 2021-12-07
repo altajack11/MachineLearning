@@ -9,7 +9,7 @@ To run a part of the code corelating to the assignment simply run the below comm
 
 Here is the list of args and what they corelate to:
 
-13 - 2.2.c and 2.2.c - Neural Network with random starting weights and zero starting weights.
+13 - 2.2.b and 2.2.c - Neural Network with random starting weights and zero starting weights.
 
 14 - 2.2.e - PyTorch EC
 
