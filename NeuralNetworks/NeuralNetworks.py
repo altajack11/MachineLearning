@@ -92,9 +92,9 @@ def sig_der(width, nodes, w, dw, dLdz, dzdz, layer):
 
 class NeuralNet(nn.Module):
     
-    def __init__(self, layer_dimensions, num_epochs=1000, ReLU=True):
+    def __init__(self, layer_dimensions, epochs=1000, ReLU=True):
         super(NeuralNet, self).__init__()      
-        self.num_epochs = num_epochs          
+        self.epochs = epochs          
 
         self.weights_init = nn.init.xavier_normal_ if not ReLU else nn.init.kaiming_uniform_
         def init_weights(model):
@@ -111,23 +111,26 @@ class NeuralNet(nn.Module):
 
         self.model.apply(init_weights)
 
-    def forward(self, X):    
-        input_X = np.float32(X.copy())           
-        out = torch.from_numpy(input_X)
+    def forward(self, x):              
+        out = torch.from_numpy(np.float32(x.copy()))
         out.requires_grad = True        
         return self.model(out)
+
+
+    def predict(self, x, y):
+        p = self.forward(x).detach().numpy()
+        p = [[1] if i >= 0 else [-1] for i in p]
+        return np.mean(p == y)
             
 
-    def train(self, train_X, train_y):
-        train_y = np.float32(train_y.copy())
-        train_y = torch.from_numpy(train_y)
+    def train(self, train_x, train_y):
+        y = torch.from_numpy(np.float32(train_y.copy()))
         criterion = nn.MSELoss()
         optimizer = torch.optim.Adam(self.parameters())
         
-        for _ in range(self.num_epochs):
+        for _ in range(self.epochs):
             optimizer.zero_grad()
-            output = self.forward(train_X)
-            loss = criterion(output, train_y)
+            loss = criterion(self.forward(train_x), y)
             loss.backward()
             optimizer.step()
 
@@ -156,28 +159,18 @@ def PyTorch_GenerateReport(training_data_filepath, test_data_filepath):
 
     for af in afs:
         for depth in depths:
-            for width in widths:
-                
+            for width in widths:               
                 dimensions = [train_x.shape[1]]
                 for _ in range(depth-2):
                     dimensions.append(width)
                 dimensions.append(1)
+
                 model = NeuralNet(dimensions, ReLU=(af=="RELU"))
                 model.train(train_x.values.reshape((-1, train_x.shape[1])), train_y)
 
-                p1 = model.forward(train_x).detach().numpy()
-                p1 = [[1] if i >= 0 else [-1] for i in p1]
-                train_error = np.mean(p1 == train_y)
-
-                p2 = model.forward(test_x).detach().numpy()
-                p2 = [[1] if i >= 0 else [-1] for i in p2]
-                test_error = np.mean(p2 == test_y)
-
-                print(f"{af}, Depth: {depth}, Width: {width}, train predictions: {train_error.round(3)}, test predictions: {test_error.round(3)}")
+                print(f"{af}, Depth: {depth}, Width: {width}, train predictions: {model.predict(train_x, train_y).round(3)}, test predictions: {model.predict(test_x, test_y).round(3)}")
 
 def main():
-    PyTorch_GenerateReport("NeuralNetworks/bank-note/train.csv", "NeuralNetworks/bank-note/test.csv")
-
     if len(sys.argv) == 2:
         if sys.argv[1] == '13':
             NeuralNetwork_GenerateReport("NeuralNetworks/bank-note/train.csv", "NeuralNetworks/bank-note/test.csv")
