@@ -16,4 +16,7 @@ case "$arg" in
     10 ) python3 SVM/SVM.py 10;;
     11 ) python3 SVM/SVM.py 11;;
     12 ) python3 SVM/SVM.py 12;;
+    13 ) python3 NeuralNetworks/NeuralNetworks.py 13;;
+    14 ) python3 NeuralNetworks/NeuralNetworks.py 14;;
+    15 ) python3 LogisticRegression/LogisticRegression.py 15;;
 esac
