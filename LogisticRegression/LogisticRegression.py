@@ -78,8 +78,8 @@ def LogisticRegression_GenerateReport(training_data_filepath, test_data_filepath
 def main():
     if len(sys.argv) == 2:
         if sys.argv[1] == '15':
-            LogisticRegression_GenerateReport("LinearRegression/concrete/train.csv",
-                                  "LinearRegression/concrete/test.csv")
+            LogisticRegression_GenerateReport("LogisticRegression/concrete/train.csv",
+                                  "LogisticRegression/concrete/test.csv")
         else:
             print("Invalid argument given.")
 
